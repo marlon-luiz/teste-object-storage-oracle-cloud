@@ -4,15 +4,18 @@ import com.oracle.bmc.ConfigFileReader;
 import com.oracle.bmc.auth.ConfigFileAuthenticationDetailsProvider;
 import com.oracle.bmc.objectstorage.ObjectStorage;
 import com.oracle.bmc.objectstorage.ObjectStorageClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 
 @Configuration
 public class OsClientConfiguration {
-    // Path to OCI config file
-    String configurationFilePath = "C:\\Users\\marlo\\Documents\\Projetos\\teste-object-storage-oracle-cloud\\config";
-    String profile = "DEFAULT";
+    @Value("${oci.config-file}")
+    private String configurationFilePath;
+
+    @Value("${oci.profile}")
+    private String profile;
 
     public ObjectStorage getObjectStorage() throws IOException {
         //load config file
